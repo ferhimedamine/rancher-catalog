@@ -1,7 +1,6 @@
 # Rancher Registry with Portus UI
 
-It is a fork from https://github.com/rancher/community-catalog/tree/master/templates/registry
-Read the original readme for more details.
+It is a fork from community catalog [Registry](https://github.com/rancher/community-catalog/tree/master/templates/registry). Read the original readme for more details.
 
 This catalogue item have several modifications from the original to make it have more compatibility and configurable options.
 
