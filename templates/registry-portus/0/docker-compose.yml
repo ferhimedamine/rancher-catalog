@@ -50,10 +50,10 @@ services:
     image: opensuse/portus:2.2
     environment:
       PORTUS_MACHINE_FQDN_VALUE: ${PDOMAIN}
-      PORTUS_DB_HOST: db
-      PORTUS_DB_NAME: portus
-      PORTUS_DB_USERNAME: portus
-      PORTUS_DB_PASSWORD: ${DBPASSWORD}
+      MARIADB_SERVICE_HOST: db
+      MARIADB_DATABASE: portus
+      MARIADB_USER: portus
+      MARIADB_PASSWORD: ${DBPASSWORD}
       PORTUS_GRAVATAR_ENABLED: true
       PORTUS_KEY_PATH: /certs/key.pem
       PORTUS_PASSWORD: ${PPASSWORD}
@@ -83,6 +83,7 @@ services:
       PORTUS_SIGNUP_ENABLED: false
       PORTUS_REGISTRY_JWT_EXIRATION_TIME: ${JWTEXPIRATION}
       RAILS_ENV: production
+      RACK_ENV: production
     tty: true
     stdin_open: true
     volumes:
