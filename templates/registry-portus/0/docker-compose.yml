@@ -30,6 +30,10 @@ services:
       REGISTRY_STORAGE_S3_ROOTDIRECTORY: ${RS3ROOTDIRECTORY}
       REGISTRY_STORAGE_S3_ACCESSKEY: ${RS3ACCESSKEY}
       REGISTRY_STORAGE_S3_SECRETKEY: ${RS3SECRETKEY}
+      REGISTRY_HEALTH_STORAGEDRIVER_ENABLED: true
+      REGISTRY_HEALTH_STORAGEDRIVER_INTERVAL: 10s
+      REGISTRY_HEALTH_STORAGEDRIVER_THRESHOLD: 3
+      REGISTRY_HTTP_DEBUG_ADDR: 0.0.0.0:5001
       REGISTRY_NOTIFICATIONS_ENDPOINTS: >
         - name: portus
           url: https://${PDOMAIN}:${PPORT}/v2/webhooks/events
@@ -38,6 +42,9 @@ services:
           backoff: 1
     tty: true
     stdin_open: true
+    expose:
+    - "5000"
+    - "5001"
     links:
     - portus:portus
     volumes:

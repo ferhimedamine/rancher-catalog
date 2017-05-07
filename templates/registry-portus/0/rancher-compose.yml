@@ -67,6 +67,7 @@
       label: "Registry S3 region"
       description: "The region of the S3 bucket, eg. ap-northeast-1 (if S3 is being used as registry storage backend)"
       required: false
+      default: "ap-northeast-1"
       type: "string"
     - variable: "RS3ROOTDIRECTORY"
       label: "Registry S3 root directory"
