@@ -47,16 +47,16 @@ services:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:host_label_soft: type=registry
   portus:
-    image: opensuse/portus:2.2
+    image: opensuse/portus:head
     environment:
       PORTUS_MACHINE_FQDN_VALUE: ${PDOMAIN}
-      MARIADB_SERVICE_HOST: db
-      MARIADB_DATABASE: portus
-      MARIADB_USER: portus
-      MARIADB_PASSWORD: ${DBPASSWORD}
+      PORTUS_PRODUCTION_HOST: db
+      PORTUS_PRODUCTION_DATABASE: portus
+      PORTUS_PRODUCTION_USERNAME: portus
+      PORTUS_PRODUCTION_PASSWORD: ${DBPASSWORD}
       PORTUS_GRAVATAR_ENABLED: true
-      PORTUS_ENCRYPTION_PRIVATE_KEY_PATH: /certs/key.pem
-      PORTUS_PORTUS_PASSWORD: ${PPASSWORD}
+      PORTUS_KEY_PATH: /certs/key.pem
+      PORTUS_PASSWORD: ${PPASSWORD}
       PORTUS_SECRET_KEY_BASE: ${PSECRET}
       PORTUS_CHECK_SSL_USAGE_ENABLED: true
       PORTUS_EMAIL_FROM: ${EMAILFROM}
