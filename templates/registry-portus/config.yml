@@ -1,6 +1,6 @@
 name: Registry with Portus UI
 description: |
   Secure Docker registry.  Web based administration.  Optional LDAP authentication.
-version: 1.0.3
+version: 1.0.5
 category: Applications
 maintainer: Roy Tsang <roy@roytsang.com>
