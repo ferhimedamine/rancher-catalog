@@ -14,13 +14,13 @@
       description: "Hostname of registry server. This should be the same as the registry hostname you later set in Portus UI. If you are not using 443 as the port of registry server, you should also input the port. eg. registry.example.com:5000"
       default: "registry.example.com"
       required: true
-      type: "int"
+      type: "string"
     - variable: "PURL"
       label: "Portus URL"
       description: "URL of portus server. This should be the url of portus server that the registry server can reach. If you are not using 443 as the port of portus server, you should also input the port. eg. https://portus.example.com:3000"
       default: "https://portus.example.com"
       required: true
-      type: "int"
+      type: "string"
     - variable: "DBPASSWORD"
       label: "DB Password"
       description: "Password for Portus database access, must be 8 characters or longer"
