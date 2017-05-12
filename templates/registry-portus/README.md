@@ -12,9 +12,9 @@ For example, you can setup rancher-lb for routing and rancher-letsencrypt to obt
 - For portus routing, you should route to port 3000 of the portus services
 - For registry routing, you should route to port 5000 of the registry services
 
-## Official portus image and mariadb
+## More recent portus image and mariadb
 
-Using most updated official portus image and using mariadb instead of mysql.
+Using recent portus image that built from official and using mariadb instead of mysql.
 
 ## Added S3 storage backend compatibility to registry service
 
