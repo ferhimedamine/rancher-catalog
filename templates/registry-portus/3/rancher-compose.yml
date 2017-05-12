@@ -1,0 +1,257 @@
+.catalog:
+  name: "Registry"
+  version: "1.0.7"
+  description: "Docker Registry"
+  questions:
+    - variable: "PDOMAIN"
+      label: "Portus FQDN"
+      description: "FQDN of portus server.  This should be the CN in the certificates and will be the URL to contact the Portus Web interface"
+      required: true
+      default: "portus.example.com"
+      type: "string"
+    - variable: "RHOSTNAME"
+      label: "Registry Hostname"
+      description: "Hostname of registry server. This should be the same as the registry hostname you later set in Portus UI. If you are not using 443 as the port of registry server, you should also input the port. eg. registry.example.com:5000"
+      default: "registry.example.com"
+      required: true
+      type: "string"
+    - variable: "PURL"
+      label: "Portus URL"
+      description: "URL of portus server. This should be the url of portus server that the registry server can reach. If you are not using 443 as the port of portus server, you should also input the port. eg. https://portus.example.com:3000"
+      default: "https://portus.example.com"
+      required: true
+      type: "string"
+    - variable: "DBPASSWORD"
+      label: "DB Password"
+      description: "Password for Portus database access, must be 8 characters or longer"
+      required: true
+      default: password
+      type: "password"
+    - variable: "ROOTPASSWORD"
+      label: "DB Root Password"
+      description: "Root Password for MySQL database, must be 8 characters or longer.  This is not normally used."
+      required: true
+      default: password
+      type: "password"
+    - variable: "PPASSWORD"
+      label: "Portus Password"
+      description: "Password for the hidden portus user. You can generate it using openssl rand -hex 64"
+      required: true
+      default: password
+      type: "password"
+    - variable: "PSECRET"
+      label: "Portus Secret Key Base"
+      description: "You can generate it using openssl rand -hex 64"
+      required: true
+      default: apisecretkeybase
+      type: "password"
+    - variable: "RSTORAGE"
+      label: "Registry storage backend"
+      description: "The storage backend option of registry server"
+      required: true
+      default: "filesystem"
+      type: "enum"
+      options:
+        - filesystem
+        - s3
+    - variable: "RS3BUCKET"
+      label: "Registry S3 bucket"
+      description: "The name of the S3 bucket (if S3 is being used as registry storage backend)"
+      required: false
+      type: "string"
+    - variable: "RS3REGION"
+      label: "Registry S3 region"
+      description: "The region of the S3 bucket, eg. ap-northeast-1 (if S3 is being used as registry storage backend)"
+      required: false
+      default: "ap-northeast-1"
+      type: "string"
+    - variable: "RS3ROOTDIRECTORY"
+      label: "Registry S3 root directory"
+      description: "The root directory of the S3 bucket that store the registry data (if S3 is being used as registry storage backend)"
+      required: false
+      default: /v2
+      type: "string"
+    - variable: "RS3ACCESSKEY"
+      label: "Registry S3 Acccess Key"
+      description: "The Acccess Key of the S3 bucket (if S3 is being used as registry storage backend)"
+      required: false
+      type: "string"
+    - variable: "RS3SECRETKEY"
+      label: "Registry S3 Secret Key"
+      description: "The Secret Key of the S3 bucket (if S3 is being used as registry storage backend)"
+      required: false
+      type: "string"
+    - variable: "LDAP"
+      label: "LDAP Enabled"
+      description: "Enable LDAP authentication"
+      required: true
+      default: false
+      type: "boolean"
+    - variable: "LDAPHOST"
+      label: "LDAP Server"
+      description: "The FQDN of the LDAP server (if LDAP authentication is being used)"
+      required: false
+      default: "ldap.company.com"
+      type: "string"
+    - variable: "LDAPPORT"
+      label: "LDAP Server port"
+      description: "The port number on the LDAP server (if LDAP authentication is being used)"
+      required: false
+      default: 389
+      type: "int"
+    - variable: "LDAPTLS"
+      label: "LDAP TLS"
+      description: "The TLS option for the LDAP server (if LDAP authentication is being used)"
+      required: false
+      default: "starttls"
+      type: "enum"
+      options:
+        - starttls
+        - simple_tls
+        - plain
+    - variable: "LDAPBASE"
+      label: "LDAP Base DN"
+      description: "The Base DN for User lookups on the LDAP server (if LDAP authentication is being used)"
+      required: false
+      default: "ou=People,dc=company,dc=com"
+      type: "string"
+    - variable: "LDAPBIND"
+      label: "LDAP Bind enabled"
+      description: "Should an authenticated Bind be used to access LDAP (if LDAP authentication is being used)"
+      required: false
+      default: false
+      type: "boolean"
+    - variable: "LDAPBINDDN"
+      label: "LDAP Bind DN"
+      description: "The DN to use for binding to the LDAP server (if LDAP authentication is being used with Bind enabled)"
+      required: false
+      default: "ou=portus,dc=company,dc=com"
+      type: "string"
+    - variable: "LDAPBINDPASS"
+      label: "LDAP Bind Password"
+      description: "The password to use for binding to the LDAP server (if LDAP authentication is being used with Bind enabled)"
+      required: false
+      default: "password"
+      type: "password"
+    - variable: "LDAPBINDUID"
+      label: "LDAP Bind UID"
+      description: "The method of defining the user (if LDAP authentication is being used with Bind enabled)"
+      required: false
+      default: "cn"
+      type: "enum"
+      options:
+        - cn
+        - sAMAccountName
+    - variable: "EMAILFROM"
+      label: "Portus Email From"
+      description: "The email address used as portus mail notification"
+      required: false
+      default: "portus@example.com"
+      type: "string"
+    - variable: "EMAILNAME"
+      label: "Portus Email Name"
+      description: "The email name used as portus mail notification"
+      required: false
+      default: "Portus"
+      type: "string"
+    - variable: "EMAILREPLYTO"
+      label: "Portus Email Reply-to"
+      description: "The reply-to address used as portus mail notification"
+      required: false
+      default: "no-reply@example.com"
+      type: "string"
+    - variable: "SMTPENABLED"
+      label: "Portus SMTP"
+      description: "Enable SMTP for portus mail notification"
+      required: false
+      default: false
+      type: "boolean"
+    - variable: "SMTPADDRESS"
+      label: "Portus SMTP ADDRESS"
+      description: "The SMTP server address (if SMTP is enabled for portus mail notification)"
+      required: false
+      default: ""
+      type: "string"
+    - variable: "SMTPPORT"
+      label: "Portus SMTP Port"
+      description: "The port of SMTP server (if SMTP is enabled for portus mail notification)"
+      required: false
+      default: 587
+      type: "int"
+    - variable: "SMTPDOMAIN"
+      label: "Portus SMTP Domain"
+      description: "The domain of SMTP server (if SMTP is enabled for portus mail notification)"
+      required: false
+      type: "string"
+    - variable: "SMTPUSER"
+      label: "Portus SMTP User"
+      description: "The username of SMTP server (if SMTP is enabled for portus mail notification)"
+      required: false
+      type: "string"
+    - variable: "SMTPPASSWORD"
+      label: "Portus SMTP Passsword"
+      description: "The password of SMTP server (if SMTP is enabled for portus mail notification)"
+      required: false
+      type: "password"
+    - variable: "SIGNUPENABLED"
+      label: "Signup Enabled"
+      description: "Enable signup form for visitor or not"
+      required: true
+      default: true
+      type: "boolean"
+    - variable: "PADMINUSER"
+      label: "Portus Admin User"
+      description: "The username of admin user (only created if having admin user, email, password together)"
+      required: false
+      type: "string"
+    - variable: "PADMINEMAIL"
+      label: "Portus Admin Email"
+      description: "The email of admin user (only created if having admin user, email, password together)"
+      required: false
+      type: "string"
+    - variable: "PADMINPASSWORD"
+      label: "Portus Admin Passsword"
+      description: "The password of admin user (only created if having admin user, email, password together)"
+      required: false
+      type: "password"
+    - variable: "JWTEXPIRATION"
+      label: "Portus JWT token Expiration Time"
+      description: "The expiration time of JWT token in minutes"
+      default: 5
+      required: false
+      type: "int"
+    - variable: VOL_REG_STORAGE_DRIVER
+      label: Registry Volume Storage Driver (Optional)
+      description: "The volume storage driver of stack scoped storage volume named `registry` which used to store registry data (if using filesystem storage)"
+      required: false
+      type: string
+    - variable: VOL_CERT_STORAGE_DRIVER
+      label: SSL Certs Volume Storage Driver (Optional)
+      description: "The volume storage driver of stack scoped storage volume named `portus-certs` which used to store ssl certs for portus authentication service"
+      required: false
+      type: string
+    - variable: VOL_PORTUSDB_STORAGE_DRIVER
+      label: Portus DB Volume Storage Driver (Optional)
+      description: "The volume storage driver of stack scoped storage volume named `portus-db` which used to store database data for portus"
+      required: false
+      type: string
+db:
+  scale: 1
+registry:
+  scale: 1
+  health_check:
+    port: 5000
+    interval: 2000
+    unhealthy_threshold: 3
+    strategy: recreate
+    healthy_threshold: 2
+    response_timeout: 2000
+portus:
+  scale: 1
+  health_check:
+    port: 3000
+    interval: 2000
+    unhealthy_threshold: 3
+    strategy: recreate
+    healthy_threshold: 2
+    response_timeout: 2000

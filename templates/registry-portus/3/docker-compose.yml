@@ -1,0 +1,123 @@
+version: '2'
+services:
+  db:
+    image: mariadb:10.1.13
+    environment:
+      MYSQL_DATABASE: portus
+      MYSQL_ROOT_PASSWORD: ${ROOTPASSWORD}
+      MYSQL_USER: portus
+      MYSQL_PASSWORD: ${DBPASSWORD}
+    tty: true
+    stdin_open: true
+    volumes:
+    - portus-db:/var/lib/mysql
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label_soft: type=portus
+  registry:
+    image: registry:2.6.1
+    environment:
+      REGISTRY_LOG_LEVEL: warn
+      REGISTRY_STORAGE_DELETE_ENABLED: true
+      REGISTRY_AUTH: token
+      REGISTRY_AUTH_TOKEN_REALM: ${PURL}/v2/token
+      REGISTRY_AUTH_TOKEN_SERVICE: ${RHOSTNAME}
+      REGISTRY_AUTH_TOKEN_ISSUER: ${PDOMAIN}
+      REGISTRY_AUTH_TOKEN_ROOTCERTBUNDLE: /certs/cert.pem
+      REGISTRY_STORAGE: ${RSTORAGE}
+      REGISTRY_STORAGE_S3_BUCKET: ${RS3BUCKET}
+      REGISTRY_STORAGE_S3_REGION: ${RS3REGION}
+      REGISTRY_STORAGE_S3_ROOTDIRECTORY: ${RS3ROOTDIRECTORY}
+      REGISTRY_STORAGE_S3_ACCESSKEY: ${RS3ACCESSKEY}
+      REGISTRY_STORAGE_S3_SECRETKEY: ${RS3SECRETKEY}
+      REGISTRY_HEALTH_STORAGEDRIVER_ENABLED: true
+      REGISTRY_HEALTH_STORAGEDRIVER_INTERVAL: 10s
+      REGISTRY_HEALTH_STORAGEDRIVER_THRESHOLD: 3
+      REGISTRY_HTTP_DEBUG_ADDR: 0.0.0.0:5001
+      REGISTRY_NOTIFICATIONS_ENDPOINTS: >
+        - name: portus
+          url: ${PURL}/v2/webhooks/events
+          timeout: 500
+          threshold: 5
+          backoff: 1
+    tty: true
+    stdin_open: true
+    expose:
+    - "5000"
+    - "5001"
+    links:
+    - portus:portus
+    volumes:
+    - portus-certs:/certs
+    - registry:/var/lib/registry
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label_soft: type=registry
+  portus:
+    image: roytsang/portus:2.2
+    environment:
+      PORTUS_MACHINE_FQDN_VALUE: ${PDOMAIN}
+      PORTUS_PRODUCTION_HOST: db
+      PORTUS_PRODUCTION_DATABASE: portus
+      PORTUS_PRODUCTION_USERNAME: portus
+      PORTUS_PRODUCTION_PASSWORD: ${DBPASSWORD}
+      PORTUS_GRAVATAR_ENABLED: true
+      PORTUS_KEY_PATH: /certs/key.pem
+      PORTUS_PASSWORD: ${PPASSWORD}
+      PORTUS_SECRET_KEY_BASE: ${PSECRET}
+      PORTUS_CHECK_SSL_USAGE_ENABLED: false
+      PORTUS_EMAIL_FROM: ${EMAILFROM}
+      PORTUS_EMAIL_NAME: ${EMAILNAME}
+      PORTUS_EMAIL_REPLY_TO: ${EMAILREPLYTO}
+      PORTUS_EMAIL_SMTP_ENABLED: ${SMTPENABLED}
+      PORTUS_EMAIL_SMTP_ADDRESS: ${SMTPADDRESS}
+      PORTUS_EMAIL_SMTP_PORT: ${SMTPPORT}
+      PORTUS_EMAIL_SMTP_USER_NAME: ${SMTPUSER}
+      PORTUS_EMAIL_SMTP_PASSWORD: ${SMTPPASSWORD}
+      PORTUS_EMAIL_SMTP_DOMAIN: ${SMTPDOMAIN}
+      PORTUS_LDAP_ENABLED: ${LDAP}
+      PORTUS_LDAP_HOSTNAME: ${LDAPHOST}
+      PORTUS_LDAP_PORT: ${LDAPPORT}
+      PORTUS_LDAP_METHOD: ${LDAPTLS}
+      PORTUS_LDAP_BASE: ${LDAPBASE}
+      PORTUS_LDAP_UID: ${LDAPBINDUID}
+      PORTUS_LDAP_AUTHENTICATION_ENABLED: ${LDAPBIND}
+      PORTUS_LDAP_AUTHENTICATION_BIND_DN: ${LDAPBINDDN}
+      PORTUS_LDAP_AUTHENTICATION_PASSWORD: ${LDAPBINDPASS}
+      PORTUS_LDAP_GUESS_EMAIL_ENABLED: true
+      PORTUS_LDAP_GUESS_EMAIL_ATTR: mail
+      PORTUS_DELETE_ENABLED: true
+      PORTUS_SIGNUP_ENABLED: ${SIGNUPENABLED}
+      PORTUS_ADMIN_USERNAME: ${PADMINUSER}
+      PORTUS_ADMIN_EMAIL: ${PADMINEMAIL}
+      PORTUS_ADMIN_PASSWORD: ${PADMINPASSWORD}
+      PORTUS_REGISTRY_JWT_EXIRATION_TIME: ${JWTEXPIRATION}
+      RAILS_ENV: production
+      RACK_ENV: production
+    tty: true
+    stdin_open: true
+    volumes:
+    - portus-certs:/certs
+    links:
+    - db:db
+    - registry:registry
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label_soft: type=portus
+  ssl:
+    image: paulczar/omgwtfssl:latest
+    environment:
+      SSL_SUBJECT: ${PDOMAIN}
+    stdin_open: true
+    volumes:
+    - portus-certs:/certs
+    labels:
+      io.rancher.container.start_once: true
+      io.rancher.scheduler.affinity:host_label_soft: type=portus
+volumes:
+  registry:
+    driver: ${VOL_REG_STORAGE_DRIVER}
+  portus-certs:
+    driver: ${VOL_CERT_STORAGE_DRIVER}
+  portus-db:
+    driver: ${VOL_PORTUSDB_STORAGE_DRIVER}
