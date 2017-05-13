@@ -4,11 +4,11 @@ It is a fork from community catalog [Registry](https://github.com/rancher/commun
 
 This catalogue item have several modifications from the original to make it have more compatibility and configurable options.
 
-## External load balancer and TLS termination
+## External load balancer and https termination
 
-LB service and sslproxy service is removed from original, you should setup your own load balancer that do the routing and terminate it with tls.
+LB service and sslproxy service is removed from original, you should setup your own load balancer that do the routing and terminate it with https.
 
-For example, you can setup rancher-lb for routing and rancher-letsencrypt to obtain certificates for tls termination.
+For example, you can setup rancher-lb for routing and rancher-letsencrypt to obtain certificates for https termination.
 - For portus routing, you should route to port 3000 of the portus services
 - For registry routing, you should route to port 5000 of the registry services
 
