@@ -199,21 +199,6 @@
       required: true
       default: true
       type: "boolean"
-    - variable: "PADMINUSER"
-      label: "Portus Admin User"
-      description: "The username of admin user (only created if having admin user, email, password together)"
-      required: false
-      type: "string"
-    - variable: "PADMINEMAIL"
-      label: "Portus Admin Email"
-      description: "The email of admin user (only created if having admin user, email, password together)"
-      required: false
-      type: "string"
-    - variable: "PADMINPASSWORD"
-      label: "Portus Admin Passsword"
-      description: "The password of admin user (only created if having admin user, email, password together)"
-      required: false
-      type: "password"
     - variable: "JWTEXPIRATION"
       label: "Portus JWT token Expiration Time"
       description: "The expiration time of JWT token in minutes"
