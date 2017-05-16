@@ -14,13 +14,13 @@
       type: int
     - variable: PATH_HTPASSWD
       label: "Path to save htpasswd config on host"
-      default: "/data/rancher-active-proxy/htpasswd"
+      default: "/srv/docker/rancher-active-proxy/htpasswd"
     - variable: PATH_VHOST
       label: "Path to save vhost config on host"
-      default: "/data/rancher-active-proxy/vhost.d"
+      default: "/srv/docker/rancher-active-proxy/vhost.d"
     - variable: PATH_LETSENCRYPT
       label: "Path to save letsencrypt config on host"
-      default: "/data/rancher-active-proxy/letsencrypt"
+      default: "/srv/docker/rancher-active-proxy/letsencrypt"
       type: string
     - variable: DEFAULT_HOST
       label: "Default Virtual Host to use"
