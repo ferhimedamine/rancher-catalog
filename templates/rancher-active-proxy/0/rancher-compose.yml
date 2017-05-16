@@ -1,0 +1,43 @@
+.catalog:
+ name: "Initial Version"
+ version: "v0.0.1"
+ questions:
+    - variable: EXTERNAL_PORT_HTTP
+      label: "Port for HTTP"
+      description: "Port that bind to port 80 of the container"
+      default: "80"
+      type: string
+    - variable: EXTERNAL_PORT_HTTPS
+      label: "Port for HTTPS"
+      description: "Port that bind to port 443 of the container"
+      default: "443"
+      type: string
+    - variable: PATH_HTPASSWD
+      label: "Path to save htpasswd config on host"
+      default: "/data/rancher-active-proxy/htpasswd"
+    - variable: PATH_VHOST
+      label: "Path to save vhost config on host"
+      default: "/data/rancher-active-proxy/vhost.d"
+    - variable: PATH_LETSENCRYPT
+      label: "Path to save letsencrypt config on host"
+      default: "/data/rancher-active-proxy/letsencrypt"
+      type: string
+    - variable: DEFAULT_HOST
+      label: "Default Virtual Host to use"
+      type: string
+    - variable: DEFAULT_EMAIL
+      label: "Default Email to use for Letsencrypt"
+      default: "foo@bar.com"
+      type: string
+    - variable: DEFAULT_PORT
+      label: "Default Port to use"
+      default: "80"
+      type: string
+    - variable: CRON
+      label: "Auto renew cron like setup"
+      default: "0 2 * * *"
+      type: string
+    - variable: DEBUG
+      label: "Set to true to enable debug"
+      default: "False"
+      type: string

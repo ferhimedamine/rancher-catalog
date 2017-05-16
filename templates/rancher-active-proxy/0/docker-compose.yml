@@ -1,0 +1,21 @@
+version: '2'
+services:
+  rancher-active-proxy:
+    image: adi90x/rancher-active-proxy:latest
+    environment:
+      DEFAULT_HOST: ${DEFAULT_HOST}
+      DEFAULT_EMAIL: ${DEFAULT_EMAIL}
+      CRON: ${CRON}
+      DEBUG: ${DEBUG}
+      DEFAULT_PORT: ${DEFAULT_PORT}
+    stdin_open: true
+    volumes:
+    - ${PATH_HTPASSWD}:/etc/nginx/htpasswd
+    - ${PATH_VHOST}:/etc/nginx/vhost.d
+    - ${PATH_LETSENCRYPT}:/etc/letsencrypt
+    tty: true
+    ports:
+    - ${EXTERNAL_PORT_HTTP}:80/tcp
+    - ${EXTERNAL_PORT_HTTPS}::443/tcp
+    labels:
+      io.rancher.container.pull_image: always
