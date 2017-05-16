@@ -12,6 +12,10 @@ For example, you can setup rancher-lb for routing and rancher-letsencrypt to obt
 - For portus routing, you should route to port 3000 of the portus services
 - For registry routing, you should route to port 5000 of the registry services
 
+### Rancher active proxy Support
+
+Support configuration of [adi90x/rancher-active-proxy](https://github.com/adi90x/rancher-active-proxy)
+
 ## More recent portus image and mariadb
 
 Using recent portus image that built from official and using mariadb instead of mysql.
