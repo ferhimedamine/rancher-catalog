@@ -1,6 +1,6 @@
 .catalog:
   name: "Registry"
-  version: "1.0.8"
+  version: "1.0.7"
   description: "Docker Registry"
   questions:
     - variable: "PDOMAIN"
@@ -220,6 +220,84 @@
       description: "The volume storage driver of stack scoped storage volume named `portus-db` which used to store database data for portus"
       required: false
       type: string
+    - variable: "REGISTRY_RAP_HOST"
+      label: "Registry RAP Host"
+      description: "Virtual Host of registry server for Rancher Active Proxy"
+      required: false
+      default: "registry.example.com"
+      type: "string"
+    - variable: "REGISTRY_RAP_HTTPS_METHOD"
+      label: "Registry RAP Https Method"
+      description: "Https method (redirect, noredirect, nohttps) of registry server for Rancher Active Proxy"
+      required: false
+      default: "redirect"
+      type: "string"
+    - variable: "REGISTRY_RAP_LE_HOST"
+      label: "Registry RAP Letsencrypt Host"
+      description: "Letsencrypt Host of registry server for Rancher Active Proxy"
+      required: false
+      default: "registry.example.com"
+      type: "string"
+    - variable: "REGISTRY_RAP_LE_EMAIL"
+      label: "Registry RAP Letsencrypt Email"
+      description: "Letsencrypt Email of registry server for Rancher Active Proxy"
+      required: false
+      default: "foo@bar.com"
+      type: "string"
+    - variable: "REGISTRY_RAP_HTTP_EXT_PORT"
+      label: "Registry RAP External HTTP Port"
+      description: "External HTTP Port of registry server for Rancher Active Proxy to listen"
+      required: false
+      default: 80
+      type: "int"
+    - variable: "REGISTRY_RAP_HTTPS_EXT_PORT"
+      label: "Registry RAP External HTTPS Port"
+      description: "External HTTPS Port of registry server for Rancher Active Proxy to listen"
+      required: false
+      default: 443
+      type: "int"
+    - variable: "PORTUS_RAP_HOST"
+      label: "Portus RAP Host"
+      description: "Virtual Host of portus server for Rancher Active Proxy"
+      required: false
+      default: "portus.example.com"
+      type: "string"
+    - variable: "PORTUS_RAP_HTTPS_METHOD"
+      label: "Portus RAP Https Method"
+      description: "Https method (redirect, noredirect, nohttps) of portus server for Rancher Active Proxy"
+      required: false
+      default: "redirect"
+      type: "string"
+    - variable: "PORTUS_RAP_LE_HOST"
+      label: "Portus RAP Letsencrypt Host"
+      description: "Letsencrypt Host of portus server for Rancher Active Proxy"
+      required: false
+      default: "registry.example.com"
+      type: "string"
+    - variable: "PORTUS_RAP_LE_EMAIL"
+      label: "Portus RAP Letsencrypt Email"
+      description: "Letsencrypt Email of portus server for Rancher Active Proxy"
+      required: false
+      default: "foo@bar.com"
+      type: "string"
+    - variable: "PORTUS_RAP_HTTP_EXT_PORT"
+      label: "Portus RAP External HTTP Port"
+      description: "External HTTP Port of portus server for Rancher Active Proxy to listen"
+      required: false
+      default: 80
+      type: "int"
+    - variable: "PORTUS_RAP_HTTPS_EXT_PORT"
+      label: "Portus RAP External HTTPS Port"
+      description: "External HTTPS Port of portus server for Rancher Active Proxy to listen"
+      required: false
+      default: 443
+      type: "int"
+    - variable: "RAP_LE_TEST"
+      label: "Registry RAP Letsencrypt Staging"
+      description: "Set to True to use letsencrypt staging server for Rancher Active Proxy"
+      required: false
+      default: false
+      type: "boolean"
 db:
   scale: 1
 registry:
