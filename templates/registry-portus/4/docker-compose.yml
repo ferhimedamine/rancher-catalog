@@ -37,7 +37,7 @@ services:
       REGISTRY_NOTIFICATIONS_ENDPOINTS: >
         - name: portus
           url: ${PURL}/v2/webhooks/events
-          timeout: 500
+          timeout: 5000ms
           threshold: 5
           backoff: 1
     tty: true

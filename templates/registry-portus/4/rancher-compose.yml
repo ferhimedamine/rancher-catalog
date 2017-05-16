@@ -18,7 +18,7 @@
     - variable: "PURL"
       label: "Portus URL"
       description: "URL of portus server. This should be the url of portus server that the registry server can reach. If you are not using 443 as the port of portus server, you should also input the port. eg. https://portus.example.com:3000"
-      default: "https://portus.example.com"
+      default: "http://portus:3000"
       required: true
       type: "string"
     - variable: "DBPASSWORD"
