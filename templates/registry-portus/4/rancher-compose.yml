@@ -81,6 +81,11 @@
       description: "The Secret Key of the S3 bucket (if S3 is being used as registry storage backend)"
       required: false
       type: "string"
+    - variable: "RHTTPSECRET"
+      label: "Registry HTTP Secret"
+      description: "The secret of registry server to sign state"
+      required: false
+      type: "string"
     - variable: "LDAP"
       label: "LDAP Enabled"
       description: "Enable LDAP authentication"
