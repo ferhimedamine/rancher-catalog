@@ -83,7 +83,7 @@
       type: "string"
     - variable: "RHTTPSECRET"
       label: "Registry HTTP Secret"
-      description: "The secret of registry server to sign state"
+      description: "The secret of registry server to sign state, you can generate it using pwgen -Bsv1 32"
       required: false
       type: "string"
     - variable: "LDAP"
