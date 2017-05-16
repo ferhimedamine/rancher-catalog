@@ -16,6 +16,6 @@ services:
     tty: true
     ports:
     - ${EXTERNAL_PORT_HTTP}:80/tcp
-    - ${EXTERNAL_PORT_HTTPS}::443/tcp
+    - ${EXTERNAL_PORT_HTTPS}:443/tcp
     labels:
       io.rancher.container.pull_image: always
