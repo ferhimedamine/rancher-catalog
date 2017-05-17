@@ -13,7 +13,8 @@ services:
     - portus-db:/var/lib/mysql
     labels:
       io.rancher.container.pull_image: always
-      io.rancher.scheduler.affinity:host_label_soft: type=portus
+      io.rancher.scheduler.affinity:host_label_soft: type=portus,role=db
+      io.rancher.container.hostname_override: container_name
   registry:
     image: registry:2.6.1
     environment:
@@ -54,6 +55,7 @@ services:
     labels:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:host_label_soft: type=registry
+      io.rancher.container.hostname_override: container_name
       rap.host: ${REGISTRY_RAP_HOST}
       rap.port: 5000
       rap.https_method: ${REGISTRY_RAP_HTTPS_METHOD}
@@ -111,6 +113,7 @@ services:
     labels:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:host_label_soft: type=portus
+      io.rancher.container.hostname_override: container_name
       rap.host: ${PORTUS_RAP_HOST}
       rap.port: 3000
       rap.https_method: ${PORTUS_RAP_HTTPS_METHOD}
@@ -129,6 +132,7 @@ services:
     labels:
       io.rancher.container.start_once: true
       io.rancher.scheduler.affinity:host_label_soft: type=portus
+      io.rancher.container.hostname_override: container_name
 volumes:
   registry:
     driver: ${VOL_REG_STORAGE_DRIVER}
