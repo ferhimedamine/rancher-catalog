@@ -1,0 +1,7 @@
+name: GitLab CE
+description: |
+  GitLab CE is a free alternative to GitHub
+version: 0.0.1
+category: Versioning
+maintainer: Roy Tsang <roy@roytsang.com>
+projectURL: "https://github.com/roytsang/rancher-catalog/tree/master/templates/gitlab-ce"
