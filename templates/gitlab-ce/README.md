@@ -15,3 +15,7 @@ Any load balancer that does not require additional configuration on backend serv
 ## SSH Port mapping
 
 By default, a gitlab container instance need to map a port on host for SSH connection. If you want to load balance it in backend without mapping the SSH port on host, you need to fork this template.
+
+## SMTP settings
+
+You should check your SMTP settings on [GitLab Documentation](https://docs.gitlab.com/omnibus/settings/smtp.html)

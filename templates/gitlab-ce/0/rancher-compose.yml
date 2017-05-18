@@ -135,7 +135,7 @@
       type: "password"
     - variable: SMTP_AUTHENTICATION
       label: SMTP Authentication
-      description: Specify the SMTP authentication method. Defaults to login if SMTP_USER is set.
+      description: Specify the SMTP authentication method. Defaults to login if SMTP_USER is set. Check it from GitLab Documentation - SMTP settings
       required: false
       type: "string"
     - variable: SMTP_STARTTLS
@@ -172,6 +172,7 @@
       label: IMAP SSL
       description: Enable SSL. Defaults to true
       required: false
+      default: true
       type: "boolean"
     - variable: IMAP_STARTTLS
       label: IMAP STARTTLS
@@ -259,7 +260,7 @@
       label: "RAP Letsencrypt Host"
       description: "Letsencrypt Host of gitlab server for Rancher Active Proxy"
       required: false
-      default: "registry.example.com"
+      default: "gitlab.example.com"
       type: "string"
     - variable: "RAP_LE_EMAIL"
       label: "RAP Letsencrypt Email"
