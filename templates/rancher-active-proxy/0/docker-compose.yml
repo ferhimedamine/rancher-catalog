@@ -19,5 +19,5 @@ services:
     - ${EXTERNAL_PORT_HTTPS}:443/tcp
     labels:
       io.rancher.container.pull_image: always
-      io.rancher.scheduler.affinity:host_label_soft: type=lb
+      io.rancher.scheduler.affinity:host_label_soft: lb=true
       io.rancher.container.hostname_override: container_name

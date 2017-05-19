@@ -20,7 +20,7 @@ services:
     tty: true
     labels:
       io.rancher.container.pull_image: always
-      io.rancher.scheduler.affinity:host_label_soft: type=gitlab,role=redis
+      io.rancher.scheduler.affinity:host_label_soft: gitlab=true,role=redis
       io.rancher.container.hostname_override: container_name
 
   postgres:
@@ -37,7 +37,7 @@ services:
     tty: true
     labels:
       io.rancher.container.pull_image: always
-      io.rancher.scheduler.affinity:host_label_soft: type=gitlab,role=db
+      io.rancher.scheduler.affinity:host_label_soft: gitlab=true,role=db
       io.rancher.container.hostname_override: container_name
 
   gitlab:
@@ -121,7 +121,7 @@ services:
     tty: true
     labels:
       io.rancher.container.pull_image: always
-      io.rancher.scheduler.affinity:host_label_soft: type=gitlab
+      io.rancher.scheduler.affinity:host_label_soft: gitlab=true
       io.rancher.container.hostname_override: container_name
       rap.host: ${RAP_HOST}
       rap.port: 80
