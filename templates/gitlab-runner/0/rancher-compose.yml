@@ -10,3 +10,37 @@
       required: true
       default: "alpine-v9.2.0-rc.2"
       type: "string"
+    - variable: "RUNNER_NAME"
+      label: "Runner Name"
+      description: "Name of the runner"
+      required: true
+      default: "docker-runner"
+      type: "string"
+    - variable: "CI_SERVER_URL"
+      label: "Runner URL"
+      description: "URL of the runner"
+      required: true
+      type: "string"
+    - variable: "REGISTRATION_TOKEN"
+      label: "Runner's registration token"
+      description: "Registration token of the runner, you can get from Gitlab"
+      required: true
+      type: "string"
+    - variable: "DOCKER_IMAGE"
+      label: "Docker image"
+      description: "Docker image to be used"
+      required: true
+      default: "docker:latest"
+      type: "string"
+    - variable: "DOCKER_PRIVILEGED"
+      label: "Docker privileges"
+      description: "Give extended privileges to container"
+      required: true
+      default: true
+      type: "boolean"
+    - variable: "RUNNER_OUTPUT_LIMIT"
+      label: "Runner Output Limit (KB)"
+      description: "Maximum build trace size in kilobytes"
+      required: false
+      default: 2048
+      type: "int"

@@ -10,6 +10,14 @@ services:
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     - gitlab-runner-data:/etc/gitlab-runner
+    environment:
+      RUNNER_NAME: ${RUNNER_NAME}
+      CI_SERVER_URL: ${CI_SERVER_URL}
+      REGISTRATION_TOKEN: ${REGISTRATION_TOKEN}
+      RUNNER_EXECUTOR: docker
+      DOCKER_IMAGE: ${DOCKER_IMAGE}
+      DOCKER_PRIVILEGED: ${DOCKER_PRIVILEGED}
+      RUNNER_OUTPUT_LIMIT: ${RUNNER_OUTPUT_LIMIT}
     stdin_open: true
     tty: true
     labels:
