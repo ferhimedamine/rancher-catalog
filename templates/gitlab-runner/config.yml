@@ -1,0 +1,7 @@
+name: GitLab Runner
+description: |
+  GitLab CI Multi Runner used to fetch and run pipeline jobs with GitLab CI
+version: 0.0.1
+category: Versioning
+maintainer: Roy Tsang <roy@roytsang.com>
+projectURL: "https://github.com/ayufan/gitlab-ci-multi-runner"

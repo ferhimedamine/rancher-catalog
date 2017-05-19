@@ -1,0 +1,18 @@
+version: '2'
+
+volumes:
+  gitlab-runner-data:
+
+services:
+  gitlabrunner:
+    restart: always
+    image: gitlab/gitlab-runner:alpine
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - gitlab-runner-data:/etc/gitlab-runner
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:host_label_soft: ci=true,role=runner
