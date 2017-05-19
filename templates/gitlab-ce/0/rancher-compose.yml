@@ -1,12 +1,291 @@
 .catalog:
-  name: "GitLab Runner"
+  name: "GitLab CE"
   version: 0.0.1
   description: |
     See the readme of the original repo for more details.
   questions:
-    - variable: "RUNNER_IMAGE_VERSION"
-      label: "Image Version"
-      description: "Dockerhub image version of gitlab runner"
+    - variable: "GITLAB_HOST"
+      label: "Gitlab Host"
+      description: "The hostname of the GitLab server"
       required: true
-      default: "alpine-v9.2.0-rc.2"
+      default: gitlab.example.com
       type: "string"
+    - variable: "GITLAB_PORT"
+      label: "Gitlab Port"
+      description: "The port of the GitLab server that is accessible in the public"
+      required: true
+      default: 443
+      type: "int"
+    - variable: "GITLAB_SSH_PORT"
+      label: "Gitlab SSH Port"
+      description: "The ssh port of the GitLab server that will map on the host"
+      required: true
+      default: 2222
+      type: "int"
+    - variable: "GITLAB_HTTPS"
+      label: "Gitlab Https"
+      description: "Set to true to enable https support"
+      required: true
+      default: true
+      type: "boolean"
+    - variable: "DB_PASSWORD"
+      label: "DB Password"
+      description: "Password for Gitlab database access"
+      required: true
+      default: password
+      type: "password"
+    - variable: "GITLAB_DEBUG"
+      label: "Gitlab Debug"
+      description: "Set this to true to enable entrypoint debugging."
+      required: true
+      default: false
+      type: "boolean"
+    - variable: GITLAB_TZ
+      label: Timezone for the environment
+      description: Configure the timezone environment for the gitlab server
+      required: false
+      default: Asia/Hong_Kong
+      type: "string"
+    - variable: GITLAB_APP_TZ
+      label: Timezone for Gitlab Application
+      description: Configure the timezone for the gitlab application
+      required: false
+      default: Hong Kong
+      type: "string"
+    - variable: GITLAB_SECRETS_DB
+      label: Gitlab Secrets DB Key Base
+      description: Encryption key for GitLab CI secret variables, as well as import credentials, in the database. You can generate one using pwgen -Bsv1 64
+      required: true
+      type: "string"
+    - variable: GITLAB_SECRETS_SECRET
+      label: Gitlab Secrets Secret Key Base
+      description: Encryption key for session secrets. You can generate one using pwgen -Bsv1 64
+      required: true
+      type: "string"
+    - variable: GITLAB_SECRETS_OTP
+      label: Gitlab Secrets OTP Key Base
+      description: Encryption key for OTP related stuff with GitLab. You can generate one using pwgen -Bsv1 64
+      required: true
+      type: "string"
+    - variable: GITLAB_ROOT_EMAIL
+      label: Gitlab Root Email
+      description: The email for the root user on firstrun. Defaults to admin@example.com
+      required: false
+      type: "string"
+    - variable: GITLAB_ROOT_PASSWORD
+      label: Gitlab Root Password
+      description: The password for the root user on firstrun. Defaults to 5iveL!fe. GitLab requires this to be at least 8 characters long
+      required: false
+      type: "password"
+    - variable: GITLAB_SIGNUP_ENABLED
+      label: Signup Enabled
+      description: Enable or disable user signups (first run only).
+      required: false
+      default: false
+      type: "boolean"
+    - variable: SMTP_ENABLED
+      label: SMTP Enabled
+      description: Enable mail delivery via SMTP. Defaults to true if SMTP_USER is defined, else defaults to false
+      required: false
+      type: "boolean"
+    - variable: GITLAB_EMAIL
+      label: Gitlab Email
+      description: The email address for the GitLab server. Defaults to value of SMTP_USER, else defaults to example@example.com
+      required: false
+      type: "string"
+    - variable: GITLAB_EMAIL_DISPLAY_NAME
+      label: Gitlab Email Display Name
+      description: The name displayed in emails sent out by the GitLab mailer. Defaults to GitLab
+      required: false
+      type: "string"
+    - variable: GITLAB_EMAIL_REPLY_TO
+      label: Gitlab Email Reply-To
+      description: The reply-to address of emails sent out by GitLab. Defaults to value of GITLAB_EMAIL, else defaults to noreply@example.com
+      required: false
+      type: "string"
+    - variable: GITLAB_EMAIL_SUBJECT_SUFFIX
+      label: Gitlab Email Subject Suffix
+      description: The e-mail subject suffix used in e-mails sent by GitLab. No defaults.
+      required: false
+      type: "string"
+    - variable: SMTP_HOST
+      label: SMTP Host
+      description: SMTP server host. Defaults to smtp.gmail.com
+      required: false
+      type: "string"
+    - variable: SMTP_PORT
+      label: SMTP Port
+      description: SMTP server port. Defaults to 587
+      required: false
+      type: "int"
+    - variable: SMTP_DOMAIN
+      label: SMTP Domain
+      description: SMTP domain. Defaults towww.gmail.com
+      required: false
+      type: "string"
+    - variable: SMTP_USER
+      label: SMTP User
+      description: SMTP username
+      required: false
+      type: "string"
+    - variable: SMTP_PASS
+      label: SMTP Password
+      description: SMTP password
+      required: false
+      type: "password"
+    - variable: SMTP_AUTHENTICATION
+      label: SMTP Authentication
+      description: Specify the SMTP authentication method. Defaults to login if SMTP_USER is set. Check it from GitLab Documentation - SMTP settings
+      required: false
+      type: "string"
+    - variable: SMTP_STARTTLS
+      label: SMTP STARTTLS
+      description: Enable STARTTLS. Defaults to true
+      required: false
+      type: "boolean"
+    - variable: IMAP_ENABLED
+      label: IMAP Enabled
+      description: Enable mail delivery via IMAP. Defaults to true if IMAP_USER is defined, else defaults to false.
+      required: false
+      type: "boolean"
+    - variable: IMAP_HOST
+      label: IMAP Host
+      description: IMAP server host. Defaults to imap.gmail.com
+      required: false
+      type: "string"
+    - variable: IMAP_PORT
+      label: IMAP Port
+      description: IMAP server port. Defaults to 993
+      required: false
+      type: "int"
+    - variable: IMAP_USER
+      label: IMAP User
+      description: IMAP username
+      required: false
+      type: "string"
+    - variable: IMAP_PASS
+      label: IMAP Password
+      description: IMAP password
+      required: false
+      type: "password"
+    - variable: IMAP_SSL
+      label: IMAP SSL
+      description: Enable SSL. Defaults to true
+      required: false
+      default: true
+      type: "boolean"
+    - variable: IMAP_STARTTLS
+      label: IMAP STARTTLS
+      description: Enable STARTTLS. Defaults to false
+      required: false
+      type: "boolean"
+    - variable: GITLAB_BACKUP_SCHEDULE
+      label: Gitlab Backup Schedule
+      description: Setup cron job to automatic backups. Possible values disable, daily, weekly or monthly. Disabled by default
+      required: false
+      type: "string"
+    - variable: GITLAB_BACKUP_EXPIRY
+      label: Gitlab Backup Expiry
+      description: Configure how long (in seconds) to keep backups before they are deleted. By default when automated backups are disabled backups are kept forever (0 seconds), else the backups expire in 7 days (604800 seconds)
+      required: false
+      type: "int"
+    - variable: GITLAB_BACKUP_TIME
+      label: Gitlab Backup timezone
+      description: Set a time for the automatic backups in HH:MM format. Defaults to 04:00
+      required: false
+      type: "string"
+    - variable: GITLAB_BACKUP_SKIP
+      label: Gitlab Backup Skip
+      description: Specified sections are skipped by the backups. Defaults to empty, i.e. lfs,uploads
+      required: false
+      type: "string"
+    - variable: AWS_BACKUPS
+      label: S3 Backup Upload Enabled
+      description: Enables automatic uploads to an Amazon S3 instance. Defaults to false
+      required: false
+      type: "boolean"
+    - variable: AWS_BACKUP_REGION
+      label: S3 Region
+      description: AWS region. No defaults
+      required: false
+      type: "string"
+    - variable: AWS_BACKUP_BUCKET
+      label: S3 bucket
+      description: AWS bucket for backup uploads. No defaults
+      required: false
+      type: "string"
+    - variable: AWS_BACKUP_ACCESS_KEY_ID
+      label: S3 Access Key ID
+      description: AWS access key id. No defaults
+      required: false
+      type: "string"
+    - variable: AWS_BACKUP_SECRET_ACCESS_KEY
+      label: S3 Secret Access Key
+      description: AWS secret access key. No defaults
+      required: false
+      type: "string"
+    - variable: AWS_BACKUP_MULTIPART_CHUNK_SIZE
+      label: S3 Multipart Chunk Size
+      description: Enables mulitpart uploads when file size reaches a defined size. eg. Use multipart uploads when file size reaches 104857600 Bytes (100MB)
+      required: false
+      type: "int"
+    - variable: REDIS_DATA_STORAGE_DRIVER
+      label: Redis Volume Storage Driver (Optional)
+      description: "The volume storage driver of stack scoped storage volume named `redis-data`"
+      required: false
+      type: string
+    - variable: POSTGRES_DATA_STORAGE_DRIVER
+      label: Postgres Volume Storage Driver (Optional)
+      description: "The volume storage driver of stack scoped storage volume named `postgresql-data`"
+      required: false
+      type: string
+    - variable: GITLAB_DATA_STORAGE_DRIVER
+      label: Gitlab Volume Storage Driver (Optional)
+      description: "The volume storage driver of stack scoped storage volume named `gitlab-data`"
+      required: false
+      type: string
+    - variable: "RAP_HOST"
+      label: "RAP Host"
+      description: "Virtual Host of gitlab server for Rancher Active Proxy"
+      required: false
+      default: "gitlab.example.com"
+      type: "string"
+    - variable: "RAP_HTTPS_METHOD"
+      label: "RAP Https Method"
+      description: "Https method (redirect, noredirect, nohttps) of gitlab server for Rancher Active Proxy"
+      required: false
+      default: "redirect"
+      type: "string"
+    - variable: "RAP_LE_HOST"
+      label: "RAP Letsencrypt Host"
+      description: "Letsencrypt Host of gitlab server for Rancher Active Proxy"
+      required: false
+      default: "gitlab.example.com"
+      type: "string"
+    - variable: "RAP_LE_EMAIL"
+      label: "RAP Letsencrypt Email"
+      description: "Letsencrypt Email of gitlab server for Rancher Active Proxy"
+      required: false
+      type: "string"
+    - variable: "RAP_LE_TEST"
+      label: "RAP Letsencrypt Staging"
+      description: "Set to True to use letsencrypt staging server for Rancher Active Proxy"
+      required: false
+      default: false
+      type: "boolean"
+    - variable: "RAP_HTTP_EXT_PORT"
+      label: "RAP External HTTP Port"
+      description: "External HTTP Port of gitlab server for Rancher Active Proxy to listen"
+      required: false
+      default: 80
+      type: "int"
+    - variable: "RAP_HTTPS_EXT_PORT"
+      label: "RAP External HTTPS Port"
+      description: "External HTTPS Port of gitlab server for Rancher Active Proxy to listen"
+      required: false
+      default: 443
+      type: "int"
+redis:
+  scale: 1
+postgres:
+  scale: 1
